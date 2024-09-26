@@ -3,6 +3,11 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
+// Enable error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!is_admin()) {
     redirect("login.php");
 }
@@ -32,6 +37,9 @@ if (!empty($kell)) {
 }
 
 $result = mysqli_query($conn, $sql);
+if (!$result) {
+    die("Database query failed: " . mysqli_error($conn));
+}
 ?>
 
 <!DOCTYPE html>
